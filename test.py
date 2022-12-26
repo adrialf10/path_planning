@@ -4,6 +4,8 @@ from PIL import Image
 black = (0, 0, 0)
 white = (255, 255, 255)
 red = (255, 0, 0)
+gray = (149, 149, 149)
+
 
 gm = Image.open("GridMap.png")
 #gm = Image.open("Maze00.png")
