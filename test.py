@@ -1,19 +1,17 @@
 import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 from PIL import Image
-import numpy as np
 
-#img = Image.open("grid.png")
-img = Image.open("Maze00.png")
+black = (0, 0, 0)
+white = (255, 255, 255)
+red = (255, 0, 0)
 
-imgarr = np.array(img)
-print(imgarr)
-"""
-print(img.getpixel((19,1)))
+gm = Image.open("GridMap.png")
+#gm = Image.open("Maze00.png")
 
-img.putpixel((19,1), (255,0,0))
+gm = gm.convert('RGB')
 
-print(img.getpixel((19,1)))
-"""
-plt.imshow(img)
+print(gm.getpixel((320,196)))
+gm.putpixel((96,117), red)
+
+plt.imshow(gm)
 plt.show()
