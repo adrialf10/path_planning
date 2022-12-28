@@ -39,12 +39,14 @@ def python_star(grid, start, goal):
 
 
 
-grid = Image.open("Maze00.png")
+start_point = (20, 20)
+end_point = (20, 22)
+image = "Maze00.png"
+grid = Image.open(image)
 
 grid = grid.convert('RGB')
 
-start_point = (20, 20)
-end_point = (20, 22)
+
 
 
 m = Map(grid.height, grid.height)
@@ -56,8 +58,13 @@ end_time = time.time()
 #print('Time Robotics elapsed:', elapsed_time/60)
 
 start_point = (start_point[0], grid.height - start_point[1])
-start_time = time.time()
+
 end_point = (end_point[0],  grid.height - end_point[1])
+
+plt.plot(start_point[0], start_point[1], "og")
+plt.plot(end_point[0], end_point[1], "xb")
+
+start_time = time.time()
 d_star(start_point, end_point, grid)
 end_time = time.time()
 
