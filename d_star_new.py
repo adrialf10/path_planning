@@ -13,7 +13,7 @@ OPEN = 1
 CLOSED = 2
 RAISED = 3
 LOWER = 4
-MAX_COST = 100000000000
+MAX_COST = 100000000000 #poner un numero con sentido????
 
 def create_node(xy, color):
 	node = dict()
@@ -52,6 +52,12 @@ def get_neighbours_list(node, grid, closedList, openList):
 			add_new_node(node_list, new_node)
 	return node_list
 
+def get_first(openList):
+	min_node = openList[0]
+	for node in openList:
+		if min_node['k'] > node['k']:
+			min_node = node
+	return min_node
 
 def d_star(origin, goal, grid):
 	goal_node = create_node(goal, red)
@@ -65,6 +71,7 @@ def d_star(origin, goal, grid):
 
 	finished = False
 	while(len(openList) > 0 and not finished):
+		#actual_node = get_first(openList)
 		actual_node = openList[0]
 		finished = expand(actual_node, origin_node, openList,closedList, grid)
 	#print('OPEN')
@@ -92,21 +99,25 @@ def expand(actual_node, initial_node, openList, closedList, grid):
 		#print("END")
 		close_node(closedList, openList, actual_node)
 		return True
+	
 	#Sino calculamos los vecinos y cerramos el nodo
 	neighbours_list = get_neighbours_list(actual_node, grid, closedList, openList)
 	#print(f"Vecinos de {actual_node['xy']}")
 	#print_n(neighbours_list)
+
+	#si k min de la open list no es el de x.h
+
 	for node in neighbours_list:
-		if not exists(closedList, node):
-			if node['state'] == NEW:
+		coste = get_cost(node, actual_node)
+		if not exists(closedList, node): 
+			if node['state'] == NEW or (node['backpoint'] == actual_node['xy'] and node['h'] != actual_node['h'] + coste)  or (node['backpoint'] != actual_node['xy'] and node['h'] > actual_node['h'] + coste):
 				node['backpoint'] = actual_node['xy']
+				#node['k'] = actual_node['h'] + coste
 				#cOMPROBAR SINO ESTA EN LA OPEN LIST
 				add_new_node(openList, node)
-			else:
-				continue
-				#print(f"{node['xy']} in NOT NEW")
+
 	close_node(closedList, openList, actual_node)
-	return
+	return False
 
 def get_optimal_path(node_list):
 	path = []
