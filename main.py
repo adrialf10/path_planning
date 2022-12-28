@@ -11,10 +11,11 @@ from d_star_new import *
 
 from manage_grid import *
 
+
 def python_star(grid, start, goal):
 	m = Map(grid.width, grid.height)
 	ox, oy = [], []
-	for x in range(grid.width):
+	for x in range(grid.height):
 		for y in range(grid.height):
 			# for the given pixel at w,h, lets check its value against the threshold
 			if grid.getpixel((x,y)) != white:
@@ -37,21 +38,16 @@ def python_star(grid, start, goal):
 		
 
 
+
 grid = Image.open("Maze00.png")
+
 grid = grid.convert('RGB')
-m = Map(164, 84)
-obstacle = list()
+
+start_point = (20, 20)
+end_point = (20, 22)
 
 
-start = (20, grid.height - 20)
-goal = (150,  grid.height - 70)
-print(goal)
-print(start)
-
-
-
-start1 = [20,  20]
-goal1 = [150,  70]
+m = Map(grid.height, grid.height)
 
 start_time = time.time()
 #python_star(grid, start1, goal1)
@@ -59,16 +55,15 @@ end_time = time.time()
 #elapsed_time = end_time - start_time
 #print('Time Robotics elapsed:', elapsed_time/60)
 
-
+start_point = (start_point[0], grid.height - start_point[1])
 start_time = time.time()
-d_star(start,goal, grid)
+end_point = (end_point[0],  grid.height - end_point[1])
+d_star(start_point, end_point, grid)
 end_time = time.time()
-
 
 elapsed_time = end_time - start_time
 print('Time elapsed:', elapsed_time/60)
 
-#n = get_neighbours(grid, point)
 
 plt.imshow(grid)
 plt.show()

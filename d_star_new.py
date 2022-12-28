@@ -109,7 +109,7 @@ def expand(actual_node, initial_node, openList, closedList, grid):
 
 	for node in neighbours_list:
 		coste = get_cost(node, actual_node)
-		if not exists(closedList, node): 
+		if not exists(closedList, node):
 			if node['state'] == NEW or (node['backpoint'] == actual_node['xy'] and node['h'] != actual_node['h'] + coste)  or (node['backpoint'] != actual_node['xy'] and node['h'] > actual_node['h'] + coste):
 				node['backpoint'] = actual_node['xy']
 				#node['k'] = actual_node['h'] + coste
