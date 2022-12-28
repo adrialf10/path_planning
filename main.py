@@ -6,12 +6,14 @@ import time
 from d_star_new import *
 
 from manage_grid import *
-grid = Image.open("Maze01.png")
+grid = Image.open("Maze02.png")
 grid = grid.convert('RGB')
 
+start_point = (49, 98)
+end_point = (49, 49)
 
 start_time = time.time()
-d_star((9,2),(153,80), grid)
+d_star(start_point, end_point, grid)
 
 end_time = time.time()
 

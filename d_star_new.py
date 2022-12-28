@@ -106,7 +106,7 @@ def expand(actual_node, initial_node, openList, closedList, grid):
 				continue
 				#print(f"{node['xy']} in NOT NEW")
 	close_node(closedList, openList, actual_node)
-	return
+	return False
 
 def get_optimal_path(node_list):
 	path = []
